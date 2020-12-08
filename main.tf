@@ -58,15 +58,6 @@ resource "google_compute_firewall" "my_firewall" {
     ports    = [80, 22]
   }
 }
-
-//module "gce-lb-fr" {
-//  source       = "github.com/GoogleCloudPlatform/terraform-google-lb"
-//  region       = var.region
-//  name         = "group1-lb"
-//  service_port = "80"
-//  target_tags  = ["allow-lb-service"]
-//}
-
 resource "google_compute_autoscaler" "autoscal" {
   name   = "my-autoscaler"
   zone   = var.zone
@@ -83,17 +74,3 @@ resource "google_compute_autoscaler" "autoscal" {
   }
 }
 
-//resource "google_dns_record_set" "frontend" {
-//  name = "frontend.${google_dns_managed_zone.prod.dns_name}"
-//  type = "A"
-//  ttl  = 300
-
-//  managed_zone = google_dns_managed_zone.prod.name
-
-//  rrdatas = [google_compute_instance_template.my_lamp_instance.network_interface[0].access_config[0].nat_ip]
-//}
-
-//resource "google_dns_managed_zone" "prod" {
-//  name     = "prod-zone"
-//  dns_name = "dev.svc.rv.ua"
-//}
