@@ -8,7 +8,7 @@ provider "google" {
 
 
 resource "google_compute_instance_template" "my_lamp_instance" {
-  name           = "my-instance-template"
+  name           = "my-instance-template1"
   machine_type   = "e2-medium"
   can_ip_forward = false
   tags = ["foo", "bar"]
@@ -29,11 +29,11 @@ resource "google_compute_instance_template" "my_lamp_instance" {
 }
 
 resource "google_compute_target_pool" "my_target_pool" {
-  name = "my-target-pool-2"
+  name = "my-target-pool-3"
 }
 
 resource "google_compute_instance_group_manager" "my_group" {
-  name = "my-igm"
+  name = "my-igm1"
   zone = var.zone
 
   version {
@@ -46,16 +46,16 @@ resource "google_compute_instance_group_manager" "my_group" {
 }
 
 resource "google_compute_network" "vpc_network" {
-  name                    = "terraform-vpc-146"
+  name                    = "terraform-vpc-147"
   auto_create_subnetworks = "true"
 }
 
 resource "google_compute_firewall" "my_firewall" {
-  name    = "terraform-scalable-firewall"
+  name    = "terraform-scalable-firewall1"
   network = google_compute_network.vpc_network.name
   allow {
     protocol = "tcp"
-    ports    = [80, 22]
+    ports    = [80, 22, 443]
   }
 }
 resource "google_compute_autoscaler" "autoscal" {
